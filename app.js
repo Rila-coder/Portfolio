@@ -42,6 +42,109 @@ async function handleSubmit(event) {
     });
 }
 
+// Advanced Typewriter with Smooth Transitions
+function advancedTypewriter() {
+  const nameElement = document.querySelector(".right-header .name");
+  if (!nameElement) return;
+
+  const namePart = "Hi, I'm <span>Mohammed Rila.</span>";
+
+  // Positions array
+  const positions = [
+    "A Full Stack Developer.",
+    "A Web Developer.",
+    "A Software Engineer.",
+    "A Frontend Developer.",
+    "A Backend Developer.",
+    "A UI/UX Designer.",
+    "A Problem Solver.",
+    "A Tech Enthusiast.",
+  ];
+
+  let posIndex = 0;
+  let charIndex = 0;
+  let isDeleting = false;
+  let isPaused = false;
+
+  // Speed settings
+  const config = {
+    typeSpeed: 100,
+    deleteSpeed: 50,
+    pauseAfterType: 2000, // Pause after typing complete
+    pauseAfterDelete: 500, // Pause before typing next
+  };
+
+  function type() {
+    if (isPaused) {
+      setTimeout(() => {
+        isPaused = false;
+        type();
+      }, config.pauseAfterDelete);
+      return;
+    }
+
+    const currentPos = positions[posIndex];
+
+    if (!isDeleting) {
+      // Typing
+      if (charIndex <= currentPos.length) {
+        const displayText = currentPos.substring(0, charIndex);
+        nameElement.innerHTML =
+          namePart + "<br>" + displayText + '<span class="cursor">|</span>';
+        charIndex++;
+        setTimeout(type, config.typeSpeed);
+      } else {
+        // Finished typing, pause then start deleting
+        isPaused = true;
+        isDeleting = true;
+        type();
+      }
+    } else {
+      // Deleting
+      if (charIndex >= 0) {
+        const displayText = currentPos.substring(0, charIndex);
+        nameElement.innerHTML =
+          namePart + "<br>" + displayText + '<span class="cursor">|</span>';
+        charIndex--;
+        setTimeout(type, config.deleteSpeed);
+      } else {
+        // Finished deleting, move to next position
+        isDeleting = false;
+        posIndex = (posIndex + 1) % positions.length;
+        charIndex = 0;
+        isPaused = true;
+        type();
+      }
+    }
+  }
+
+  // Add cursor style
+  if (!document.querySelector("#typewriter-cursor")) {
+    const style = document.createElement("style");
+    style.id = "typewriter-cursor";
+    style.textContent = `
+            .cursor {
+                color: var(--color-secondary);
+                font-weight: bold;
+                animation: blink 0.8s infinite;
+            }
+            @keyframes blink {
+                0%, 100% { opacity: 1; }
+                50% { opacity: 0; }
+            }
+        `;
+    document.head.appendChild(style);
+  }
+
+  // Start after 1 second
+  setTimeout(type, 1000);
+}
+
+// Call this function
+advancedTypewriter();
+
+
+
 form.addEventListener("submit", handleSubmit);
 
 /* --- PORTFOLIO PAGINATION LOGIC --- */

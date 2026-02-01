@@ -881,11 +881,53 @@ section {
 
 /* Add this to the bottom of styles.css */
 button.main-btn {
-    background-color: transparent; /* Removes default gray background */
-    cursor: pointer;               /* changes mouse to hand icon */
-    font-family: inherit;          /* Uses your Poppins font */
-    font-size: inherit;            /* Matches text size */
-    outline: none;                 /* Removes click outline */
+  background-color: transparent;
+  /* Removes default gray background */
+  cursor: pointer;
+  /* changes mouse to hand icon */
+  font-family: inherit;
+  /* Uses your Poppins font */
+  font-size: inherit;
+  /* Matches text size */
+  outline: none;
+  /* Removes click outline */
+}
+
+/* Typewriter cursor styles */
+.typing-cursor {
+  color: var(--color-secondary) !important;
+  font-weight: bold;
+  animation: cursorBlink 1.2s infinite;
+}
+
+@keyframes cursorBlink {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+}
+
+/* Ensure name text stays on same line */
+.right-header .name {
+  line-height: 1.4;
+  min-height: 120px;
+  /* Prevent layout shift */
+
+  span:first-child {
+    color: var(--color-secondary);
+  }
+}
+
+/* For light mode */
+.light-mode {
+  .typing-cursor {
+    color: var(--color-secondary) !important;
+  }
 }
 
 
