@@ -407,10 +407,10 @@ section {
 .portfolios {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 1fr; /* ADD THIS LINE - makes all rows equal height */
   grid-gap: 2rem;
   margin-top: 3rem;
   padding-bottom: 2rem !important;
-  /* Reduced padding since pagination is below */
 }
 
 .portfolio-item {
@@ -422,7 +422,7 @@ section {
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  /* Ensures image fits corners */
+  height: 100%; /* ADD THIS LINE */
 }
 
 .portfolio-item:hover {
@@ -478,6 +478,11 @@ section {
   color: var(--color-grey-2);
   margin-bottom: 1rem;
   line-height: 1.4rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  flex: 1;
 }
 
 /* Tech Stack Tags */
